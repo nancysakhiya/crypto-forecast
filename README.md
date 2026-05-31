@@ -9,7 +9,7 @@
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
 CryptoSight is a full-stack ML application that forecasts cryptocurrency prices using two models (LSTM neural network + Facebook Prophet) and enriches predictions with real-time news sentiment scored by FinBERT — a BERT model fine-tuned on financial text.
 
@@ -17,7 +17,7 @@ CryptoSight is a full-stack ML application that forecasts cryptocurrency prices 
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Technology |
 |---|---|
@@ -35,7 +35,7 @@ CryptoSight is a full-stack ML application that forecasts cryptocurrency prices 
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 crypto-forecast/
@@ -69,7 +69,7 @@ crypto-forecast/
 
 ---
 
-## 🧠 ML Models
+## ML Models
 
 ### LSTM Neural Network
 - **Architecture:** 3 stacked LSTM layers (128→64→32) with Dropout + BatchNorm
@@ -90,7 +90,7 @@ crypto-forecast/
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone the repo
 ```bash
@@ -118,7 +118,7 @@ Open `http://localhost:8501` in your browser.
 
 ---
 
-## ☁️ Deployment (Hugging Face Spaces)
+## Deployment (Hugging Face Spaces)
 
 1. Create a new Space on [huggingface.co/spaces](https://huggingface.co/spaces) — choose **Streamlit** SDK
 2. Push this repo to the Space's git remote
@@ -127,7 +127,7 @@ Open `http://localhost:8501` in your browser.
 
 ---
 
-## 📊 Results
+## Results
 
 | Model | MAE ($) | RMSE ($) | MAPE (%) |
 |-------|---------|----------|----------|
@@ -138,7 +138,7 @@ Open `http://localhost:8501` in your browser.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Python 3.10+**
 - **TensorFlow 2.16** — LSTM model
@@ -150,7 +150,3 @@ Open `http://localhost:8501` in your browser.
 - **scikit-learn** — preprocessing & metrics
 
 ---
-
-## 📝 License
-
-MIT License — feel free to use for your own portfolio.
