@@ -1,3 +1,12 @@
+---
+title: CryptoSight
+emoji: 🔮
+colorFrom: green
+colorTo: blue
+sdk: docker
+pinned: false
+---
+
 # 🔮 CryptoSight — ML-Powered Crypto Forecasting Dashboard
 
 > **End-to-end ML project** combining LSTM time-series forecasting, Facebook Prophet, and FinBERT sentiment analysis in a production-quality Streamlit dashboard.
