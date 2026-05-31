@@ -1,0 +1,221 @@
+/* ── Google Fonts ─────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
+
+/*  CSS Variables  */
+:root {
+    --bg:        #080c14;
+    --surface:   #0e1420;
+    --border:    #1c2438;
+    --accent:    #00f5c4;
+    --accent2:   #6c63ff;
+    --warn:      #ff6b6b;
+    --text:      #e2e8f0;
+    --muted:     #64748b;
+    --up:        #00f5c4;
+    --down:      #ff6b6b;
+    --font-head: 'Syne', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --font-body: 'DM Sans', sans-serif;
+}
+
+/*  Base overrides  */
+html, body, [data-testid="stAppViewContainer"] {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+    font-family: var(--font-body);
+}
+
+[data-testid="stSidebar"] {
+    background-color: var(--surface) !important;
+    border-right: 1px solid var(--border) !important;
+}
+
+[data-testid="stSidebar"] * {
+    color: var(--text) !important;
+}
+
+/* Header  */
+.main-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0 24px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+}
+
+.header-logo {
+    font-size: 2.4rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 12px rgba(0,245,196,0.6));
+}
+
+.header-title {
+    font-family: var(--font-head) !important;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    color: var(--text) !important;
+    letter-spacing: -0.03em !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.header-sub {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin: 0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Metric cards  */
+.metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.metric-card:hover { border-color: var(--accent); }
+
+.metric-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+}
+.metric-value {
+    font-family: var(--font-head);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+}
+.metric-delta {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+.delta-up   { color: var(--up); }
+.delta-down { color: var(--down); }
+
+/* Section titles  */
+.section-title {
+    font-family: var(--font-head);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin: 24px 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+/* Sentiment badge  */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.badge-bullish  { background: rgba(0,245,196,0.12); color: var(--up);   border: 1px solid rgba(0,245,196,0.3); }
+.badge-bearish  { background: rgba(255,107,107,0.12); color: var(--down); border: 1px solid rgba(255,107,107,0.3); }
+.badge-neutral  { background: rgba(100,116,139,0.15); color: var(--muted); border: 1px solid rgba(100,116,139,0.3); }
+
+/* News card */
+.news-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+}
+.news-title {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+.news-meta {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+}
+
+/* Streamlit widget overrides */
+div[data-testid="stSelectbox"] > div,
+div[data-testid="stSlider"] > div > div,
+div[data-testid="stDateInput"] input {
+    background: var(--surface) !important;
+    border-color: var(--border) !important;
+    color: var(--text) !important;
+}
+
+.stTabs [data-baseweb="tab-list"] {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 4px;
+    gap: 4px;
+}
+.stTabs [data-baseweb="tab"] {
+    font-family: var(--font-mono) !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.03em;
+    color: var(--muted) !important;
+    background: transparent !important;
+    border-radius: 7px !important;
+    padding: 6px 16px !important;
+}
+.stTabs [aria-selected="true"] {
+    background: var(--bg) !important;
+    color: var(--accent) !important;
+}
+.stTabs [data-baseweb="tab-highlight"] { display: none !important; }
+
+/* hide default streamlit header/footer */
+#MainMenu, footer, header { visibility: hidden; }
+.block-container { padding-top: 1rem !important; }
+
+/* Info box */
+.info-box {
+    background: rgba(108,99,255,0.08);
+    border: 1px solid rgba(108,99,255,0.25);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: #a5b4fc;
+    line-height: 1.6;
+}
+
+/* Forecast confidence band legend */
+.legend-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+.legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
