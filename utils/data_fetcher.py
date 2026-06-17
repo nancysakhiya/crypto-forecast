@@ -3,24 +3,24 @@ import pandas as pd
 import requests
 import streamlit as st
 from datetime import datetime, date
+import time
 
 # Price data 
 
 @st.cache_data(ttl=300, show_spinner=False)
 def fetch_price_data(ticker: str, start: date, end: date) -> pd.DataFrame:
     """Download OHLCV + compute technical indicators."""
-    try:
-        df = yf.download(ticker, start=start, end=end, progress=False)
-
-        if df.empty:
-            st.error(
-                "Unable to fetch cryptocurrency data. Yahoo Finance may be rate limiting requests. Please try again later."
-            )
-            st.stop()
-
-    except Exception as e:
-        st.error(f"Data download failed: {e}")
-        st.stop()
+    for attempt in range(3):
+        try:
+            df = yf.download(ticker, period="90d", interval="1d", progress=False)
+            if not df.empty:
+                break
+        except Exception as e:
+            if attempt < 2:
+                time.sleep(10)
+            else:
+                st.error(f"Data download failed after 3 attempts: {e}")
+                st.stop()
 
     df = df[["Open", "High", "Low", "Close", "Volume"]].copy()
     df.columns = ["open", "high", "low", "close", "volume"]
