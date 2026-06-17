@@ -1,4 +1,3 @@
-
 import yfinance as yf
 import pandas as pd
 import requests
@@ -10,10 +9,18 @@ from datetime import datetime, date
 @st.cache_data(ttl=300, show_spinner=False)
 def fetch_price_data(ticker: str, start: date, end: date) -> pd.DataFrame:
     """Download OHLCV + compute technical indicators."""
-    df = yf.download(ticker, start=start, end=end, progress=False)
+    try:
+        df = yf.download(ticker, start=start, end=end, progress=False)
 
-    if df.empty:
-        raise ValueError(f"No data returned for {ticker}. Check the date range.")
+        if df.empty:
+            st.error(
+                "Unable to fetch cryptocurrency data. Yahoo Finance may be rate limiting requests. Please try again later."
+            )
+            st.stop()
+
+    except Exception as e:
+        st.error(f"Data download failed: {e}")
+        st.stop()
 
     df = df[["Open", "High", "Low", "Close", "Volume"]].copy()
     df.columns = ["open", "high", "low", "close", "volume"]
