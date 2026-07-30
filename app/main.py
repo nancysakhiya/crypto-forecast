@@ -1,6 +1,9 @@
+import os
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
 import streamlit as st
 import sys
-import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -35,10 +38,10 @@ config = render_sidebar()
 
 # Tab navigation 
 tab1, tab2, tab3, tab4 = st.tabs([
-    "📈  Overview",
-    "🤖  Forecast",
-    "💬  Sentiment",
-    "📊  Model Performance",
+    "Overview",
+    "Forecast",
+    "Sentiment",
+    "Model Performance",
 ])
 
 with tab1:
