@@ -1,9 +1,6 @@
-"""
-models/lstm_model.py
-────────────────────
-Builds, trains, and forecasts with a stacked LSTM.
-Uses MinMaxScaler; returns forecast as a tidy DataFrame.
-"""
+import os
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  
 
 import numpy as np
 import pandas as pd
@@ -11,15 +8,18 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import streamlit as st
 
-
-# ── Build model lazily to avoid TF import at module level ─────────────────────
 def _build_model(seq_len: int, n_features: int):
     from tensorflow.keras.models import Sequential
-    from tensorflow.keras.layers import LSTM, Dense, Dropout, BatchNormalization
+    from tensorflow.keras.layers import LSTM, Dense, Dropout, BatchNormalization, Input
     from tensorflow.keras.optimizers import Adam
+    import tensorflow as tf
+
+    tf.config.threading.set_intra_op_parallelism_threads(1)
+    tf.config.threading.set_inter_op_parallelism_threads(1)
 
     model = Sequential([
-        LSTM(128, return_sequences=True, input_shape=(seq_len, n_features)),
+        Input(shape=(seq_len, n_features)),
+        LSTM(128, return_sequences=True),
         Dropout(0.2),
         BatchNormalization(),
         LSTM(64, return_sequences=True),
@@ -35,13 +35,8 @@ def _build_model(seq_len: int, n_features: int):
 
 
 # Public API 
-
 @st.cache_resource(show_spinner=False)
 def train_lstm(ticker: str, df_hash: int, df: pd.DataFrame, forecast_days: int):
-    """
-    Train LSTM and return (model, scaler, metrics_dict).
-    Cached by ticker + data hash to avoid re-training on re-runs.
-    """
     from tensorflow.keras.callbacks import EarlyStopping
 
     SEQ_LEN    = 60
